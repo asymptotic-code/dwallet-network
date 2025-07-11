@@ -926,7 +926,7 @@ public struct SessionIdentifier has key, store {
 /// 2. Approval is combined with presign capability
 /// 3. Network validates and generates signature
 /// 4. Approval is consumed and cannot be reused
-public struct MessageApproval has store, drop {
+public struct MessageApproval has store {
     /// ID of the dWallet authorized to sign this message
     dwallet_id: ID,
     /// Cryptographic signature algorithm to use
@@ -951,7 +951,7 @@ public struct MessageApproval has store, drop {
 /// - Imported key dWallets may have different trust models
 /// - Users should understand the provenance of imported keys
 /// - Same single-use and message-binding properties apply
-public struct ImportedKeyMessageApproval has store, drop {
+public struct ImportedKeyMessageApproval has store {
     /// ID of the imported key dWallet authorized to sign this message
     dwallet_id: ID,
     /// Cryptographic signature algorithm to use
@@ -5035,7 +5035,7 @@ public fun imported_key_dwallet_id(self: &ImportedKeyDWalletCap): ID {
 public fun last_processed_checkpoint_sequence_number(
     self: &DWalletCoordinatorInner,
 ): Option<u64> {
-    self.last_processed_checkpoint_sequence_number
+    option::some(self.last_processed_checkpoint_sequence_number)
 }
 
 #[test_only]

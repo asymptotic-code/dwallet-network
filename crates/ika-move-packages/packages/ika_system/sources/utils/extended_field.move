@@ -22,8 +22,9 @@ public struct Key() has copy, drop, store;
 /// Creates a new extended field with the given value.
 public fun new<T: store>(value: T, ctx: &mut TxContext): ExtendedField<T> {
     let mut id = object::new(ctx);
-    df::add(&mut id, Key(), value);
-    ExtendedField { id }
+    let mut field = ExtendedField { id };
+    df::add(&mut field.id, Key(), value);
+    field
 }
 
 /// Borrows the value stored in the extended field.
@@ -44,9 +45,9 @@ public fun swap<T: store>(field: &mut ExtendedField<T>, value: T): T {
 }
 
 /// Destroys the extended field and returns the value stored in it.
-public fun destroy<T: store>(field: ExtendedField<T>): T {
+public fun destroy<T: store>(mut field: ExtendedField<T>): T {
+    let value = df::remove(&mut field.id, Key());
     let ExtendedField { mut id } = field;
-    let value = df::remove(&mut id, Key());
     id.delete();
     value
 }
