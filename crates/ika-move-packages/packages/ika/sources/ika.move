@@ -8,6 +8,7 @@ module ika::ika;
 
 use sui::coin;
 use sui::url;
+use sui::transfer;
 
 /// The OTW for the `IKA` coin.
 public struct IKA has drop {}

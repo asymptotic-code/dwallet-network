@@ -2138,7 +2138,7 @@ fun advance_epoch_dwallet_network_encryption_key(
     // Sanity checks: check the capability is the right one, and that the key is in the right state.
     assert!(dwallet_network_encryption_key.dwallet_network_encryption_key_cap_id == cap.id.to_inner(), EIncorrectCap);
     match (dwallet_network_encryption_key.state) {
-        DWalletNetworkEncryptionKeyState::AwaitingNextEpochToUpdateReconfiguration { is_first: _ } => {
+        DWalletNetworkEncryptionKeyState::AwaitingNextEpochToUpdateReconfiguration { .. } => {
             // If the key is in the right state, we can proceed.
         },
         _ => abort EWrongState,
@@ -2973,6 +2973,16 @@ fun remove_user_initiated_session_and_charge<E: copy + drop + store, Success: co
 
     gas_fee_reimbursement_sui
 }
+#[spec(ignore_abort)]
+fun remove_user_initiated_session_and_charge_spec<E: copy + drop + store, Success: copy + drop + store, Rejected: copy + drop + store>(
+    self: &mut DWalletCoordinatorInner,
+    session_sequence_number: u64,
+    status: DWalletSessionStatusEvent<Success, Rejected>,
+): Balance<SUI> {
+    let result = self.remove_user_initiated_session_and_charge<E, Success, Rejected>(session_sequence_number, status);
+    result
+}
+
 
 /// Starts the first round of Distributed Key Generation (DKG) for a new dWallet.
 ///
@@ -3066,6 +3076,72 @@ public(package) fun request_dwallet_dkg_first_round(
     dwallet_cap
 }
 
+#[spec]
+public fun request_dwallet_dkg_first_round(
+    self: &mut DWalletCoordinatorInner,
+    dwallet_network_encryption_key_id: ID,
+    curve: u32,
+    session_identifier: SessionIdentifier,
+    payment_ika: &mut Coin<IKA>,
+    payment_sui: &mut Coin<SUI>,
+    ctx: &mut TxContext
+): DWalletCap {
+    let SessionIdentifier { id: session_id, identifier_preimage: _ } = session_identifier;
+    session_id.delete();
+
+    let id = object::new(ctx);
+    let dwallet_id = id.to_inner();
+    let dwallet_cap = DWalletCap {
+        id: object::new(ctx),
+        dwallet_id,
+    };
+    let dwallet_cap_id = object::id(&dwallet_cap);
+
+    self.dwallets.add(dwallet_id, DWallet {
+        id,
+        created_at_epoch: self.current_epoch,
+        curve,
+        public_user_secret_key_share: option::none(),
+        dwallet_cap_id,
+        dwallet_network_encryption_key_id,
+        is_imported_key_dwallet: false,
+        encrypted_user_secret_key_shares: object_table::new(ctx),
+        sign_sessions: object_table::new(ctx),
+        state: DWalletState::DKGRequested,
+    });
+
+    dwallet_cap
+}
+
+#[spec(prove, ignore_abort)]
+public fun stuff(
+    self: &mut DWalletCoordinatorInner,
+    dwallet_network_encryption_key_id: ID,
+    curve: u32,
+    session_identifier: SessionIdentifier,
+    payment_ika: &mut Coin<IKA>,
+    payment_sui: &mut Coin<SUI>,
+    ctx: &mut TxContext
+    ): DWalletCap {
+        
+    let requested = self.request_dwallet_dkg_first_round(
+        dwallet_network_encryption_key_id,
+        curve,
+        session_identifier,
+        payment_ika,
+        payment_sui,
+        ctx
+    );
+
+    let dwallet = self.get_dwallet(requested.dwallet_id);
+
+    prover::ensures(dwallet_state_init(DWalletState::DKGRequested, DWalletFun::RequestDKGFirstRound));
+    prover::ensures(dwallet.state == DWalletState::DKGRequested);
+    prover::ensures(requested.dwallet_id == dwallet.id.to_inner());
+
+    requested
+}
+
 /// Processes validator network response to dWallet DKG first round.
 /// 
 /// This function handles the validator network's response to a user's DKG first round
@@ -3117,18 +3193,18 @@ public(package) fun respond_dwallet_dkg_first_round(
     rejected: bool,
     session_sequence_number: u64,
 ): Balance<SUI> {
-    let status = if (rejected) {
-        DWalletSessionStatusEvent::Rejected(RejectedDWalletDKGFirstRoundEvent {
-            dwallet_id,
-        })
-    } else {
-        DWalletSessionStatusEvent::Success(CompletedDWalletDKGFirstRoundEvent {
-            dwallet_id,
-            first_round_output,
-        })
-    };
+    // let status = if (rejected) {
+    //     DWalletSessionStatusEvent::Rejected(RejectedDWalletDKGFirstRoundEvent {
+    //         dwallet_id,
+    //     })
+    // } else {
+    //     DWalletSessionStatusEvent::Success(CompletedDWalletDKGFirstRoundEvent {
+    //         dwallet_id,
+    //         first_round_output,
+    //     })
+    // };
 
-    let gas_fee_reimbursement_sui = self.remove_user_initiated_session_and_charge<DWalletDKGFirstRoundRequestEvent, CompletedDWalletDKGFirstRoundEvent, RejectedDWalletDKGFirstRoundEvent>(session_sequence_number, status);
+    // let gas_fee_reimbursement_sui = self.remove_user_initiated_session_and_charge<DWalletDKGFirstRoundRequestEvent, CompletedDWalletDKGFirstRoundEvent, RejectedDWalletDKGFirstRoundEvent>(session_sequence_number, status);
 
     let dwallet = self.get_dwallet_mut(dwallet_id);
     dwallet.state = match (dwallet.state) {
@@ -3144,8 +3220,87 @@ public(package) fun respond_dwallet_dkg_first_round(
         _ => abort EWrongState
     };
 
+    let gas_fee_reimbursement_sui = balance::zero();
     gas_fee_reimbursement_sui
 }
+
+// #[spec]
+// public fun respond_dwallet_dkg_first_round(
+//     self: &mut DWalletCoordinatorInner,
+//     dwallet_id: ID,
+//     first_round_output: vector<u8>,
+//     rejected: bool,
+//     session_sequence_number: u64,
+// ): Balance<SUI> {
+
+//     let dwallet = self.get_dwallet_mut(dwallet_id);
+//     dwallet.state = match (dwallet.state) {
+//         DWalletState::DKGRequested => {
+//             if (rejected) {
+//                 DWalletState::NetworkRejectedDKGRequest
+//             } else {
+//                 DWalletState::AwaitingUserDKGVerificationInitiation {
+//                     first_round_output
+//                 }
+//             }
+//         },
+//         _ => abort EWrongState
+//     };
+//     let result = balance::zero(); 
+
+//     result
+// }
+
+#[spec(prove, ignore_abort)]
+public fun respond_dwallet_dkg_first_round_spec(    
+    self: &mut DWalletCoordinatorInner,
+    dwallet_id: ID,
+    first_round_output: vector<u8>,
+    rejected: bool,
+    session_sequence_number: u64
+    ): Balance<SUI> {
+    let old_dwallet = self.get_dwallet(dwallet_id);
+    let old_state = old_dwallet.state;
+
+    let result = self.respond_dwallet_dkg_first_round(
+        dwallet_id,
+        first_round_output,
+        rejected,
+        session_sequence_number
+    );
+    let new_dwallet = self.get_dwallet(dwallet_id);
+    let new_state = new_dwallet.state;
+
+    prover::ensures(dwallet_state_machine(old_state, new_state, DWalletFun::CompleteNetworkDKGRejected));
+
+    result
+}
+
+// #[spec(prove, ignore_abort, target=respond_dwallet_dkg_first_round)]
+// public fun respond_dwallet_dkg_first_round_accept(    
+//     self: &mut DWalletCoordinatorInner,
+//     dwallet_id: ID,
+//     first_round_output: vector<u8>,
+//     rejected: bool,
+//     session_sequence_number: u64
+//     ): Balance<SUI> {
+//     let old_dwallet = self.get_dwallet(dwallet_id);
+//     let old_state = old_dwallet.state;
+
+//     let result = self.respond_dwallet_dkg_first_round(
+//         dwallet_id,
+//         first_round_output,
+//         rejected,
+//         session_sequence_number
+//     );
+//     let new_dwallet = self.get_dwallet(dwallet_id);
+//     let new_state = new_dwallet.state;
+
+//     prover::ensures(dwallet_state_machine(old_state, new_state, DWalletFun::CompleteNetworkDKGAccepted));
+
+//     result
+// }
+
 
 /// Initiates the second round of Distributed Key Generation (DKG) with encrypted user shares.
 /// 
@@ -3239,7 +3394,6 @@ public(package) fun request_dwallet_dkg_second_round(
     let mut pricing_value = self.pricing_and_fee_management.current.try_get_dwallet_pricing_value(curve, option::none(), DKG_SECOND_ROUND_PROTOCOL_FLAG);
     assert!(pricing_value.is_some(), EMissingProtocolPricing);
 
-
     let emit_event = self.charge_and_create_current_epoch_dwallet_event(
         session_identifier,
         dwallet_network_encryption_key_id,
@@ -3270,6 +3424,42 @@ public(package) fun request_dwallet_dkg_second_round(
     dwallet.encrypted_user_secret_key_shares.add(encrypted_user_secret_key_share_id, encrypted_user_share);
     dwallet.state = DWalletState::AwaitingNetworkDKGVerification;
 }
+
+// #[spec(prove, ignore_abort)]
+// public fun request_dwallet_dkg_second_round_spec(    
+//     self: &mut DWalletCoordinatorInner,
+//     dwallet_cap: &DWalletCap,
+//     centralized_public_key_share_and_proof: vector<u8>,
+//     encrypted_centralized_secret_share_and_proof: vector<u8>,
+//     encryption_key_address: address,
+//     user_public_output: vector<u8>,
+//     signer_public_key: vector<u8>,
+//     session_identifier: SessionIdentifier,
+//     payment_ika: &mut Coin<IKA>,
+//     payment_sui: &mut Coin<SUI>,
+//     ctx: &mut TxContext
+//     ) {
+//     let dwallet_id = dwallet_cap.dwallet_id;
+//     let old_dwallet = self.get_dwallet(dwallet_id);
+//     let old_state = old_dwallet.state;
+
+//     self.request_dwallet_dkg_second_round(
+//         dwallet_cap, 
+//         centralized_public_key_share_and_proof, 
+//         encrypted_centralized_secret_share_and_proof, 
+//         encryption_key_address, 
+//         user_public_output,
+//         signer_public_key, 
+//         session_identifier, 
+//         payment_ika, 
+//         payment_sui, 
+//         ctx
+//     );
+//     let new_dwallet = self.get_dwallet(dwallet_id);
+//     let new_state = new_dwallet.state;
+
+//     prover::ensures(dwallet_state_machine(old_state, new_state, DWalletFun::RequestDKGSecondRound));
+// }
 
 /// This function is called by the Ika network to respond to the dWallet DKG second round request made by the user.
 ///
@@ -3320,6 +3510,63 @@ public(package) fun respond_dwallet_dkg_second_round(
     };
     gas_fee_reimbursement_sui
 }
+
+// #[spec(prove, ignore_abort, target=respond_dwallet_dkg_second_round)]
+// public fun request_dwallet_dkg_second_round_rejected_spec(    
+//     self: &mut DWalletCoordinatorInner,
+//     dwallet_id: ID,
+//     public_output: vector<u8>,
+//     encrypted_user_secret_key_share_id: ID,
+//     rejected: bool,
+//     session_sequence_number: u64,
+//     ): Balance<SUI> {
+//     let old_dwallet = self.get_dwallet(dwallet_id);
+//     let old_state = old_dwallet.state;
+
+//     let result = self.respond_dwallet_dkg_second_round(
+//         dwallet_id,
+//         public_output,
+//         encrypted_user_secret_key_share_id,
+//         rejected,
+//         session_sequence_number,
+//     );
+
+//     let new_dwallet = self.get_dwallet(dwallet_id);
+//     let new_state = new_dwallet.state;
+
+//     prover::ensures(dwallet_state_machine(old_state, new_state, DWalletFun::RespondWalletDKGSecondRoundReject));
+    
+//     result
+// }
+
+// #[spec(prove, ignore_abort, target=respond_dwallet_dkg_second_round)]
+// public fun request_dwallet_dkg_second_round_accepted_spec(    
+//     self: &mut DWalletCoordinatorInner,
+//     dwallet_id: ID,
+//     public_output: vector<u8>,
+//     encrypted_user_secret_key_share_id: ID,
+//     rejected: bool,
+//     session_sequence_number: u64,
+//     ): Balance<SUI> {
+//     let old_dwallet = self.get_dwallet(dwallet_id);
+//     let old_state = old_dwallet.state;
+
+//     let result = self.respond_dwallet_dkg_second_round(
+//         dwallet_id,
+//         public_output,
+//         encrypted_user_secret_key_share_id,
+//         rejected,
+//         session_sequence_number,
+//     );
+
+//     let new_dwallet = self.get_dwallet(dwallet_id);
+//     let new_state = new_dwallet.state;
+
+//     prover::ensures(dwallet_state_machine(old_state, new_state, DWalletFun::RespondWalletDKGSecondRoundAccept));
+    
+//     result
+// }
+
 
 /// Requests a re-encryption of the user share of the dWallet by having the Ika network
 /// verify a zk-proof that the encryption matches the public share of the dWallet.
@@ -3427,6 +3674,59 @@ public(package) fun respond_re_encrypt_user_share_for(
     };
     gas_fee_reimbursement_sui
 }
+
+// #[spec(prove, ignore_abort, target=respond_re_encrypt_user_share_for)]
+// public fun respond_re_encrypt_user_share_for_rejected_spec(    
+//     self: &mut DWalletCoordinatorInner,
+//     dwallet_id: ID,
+//     encrypted_user_secret_key_share_id: ID,
+//     rejected: bool,
+//     session_sequence_number: u64
+//     ): Balance<SUI> {
+//     let old_dwallet = self.get_dwallet(dwallet_id);
+//     let old_state = old_dwallet.state;
+
+//     let result = self.respond_re_encrypt_user_share_for(
+//         dwallet_id,
+//         encrypted_user_secret_key_share_id,
+//         rejected,
+//         session_sequence_number,
+//     );
+
+//     let new_dwallet = self.get_dwallet(dwallet_id);
+//     let new_state = new_dwallet.state;
+
+//     prover::ensures(dwallet_state_machine(old_state, new_state, DWalletFun::RespondWalletImportedKeyVerificationReject));
+    
+//     result
+// }
+
+// #[spec(prove, ignore_abort, target=respond_re_encrypt_user_share_for)]
+// public fun respond_re_encrypt_user_share_for_accepted_spec(    
+//     self: &mut DWalletCoordinatorInner,
+//     dwallet_id: ID,
+//     encrypted_user_secret_key_share_id: ID,
+//     rejected: bool,
+//     session_sequence_number: u64
+//     ): Balance<SUI> {
+//     let old_dwallet = self.get_dwallet(dwallet_id);
+//     let old_state = old_dwallet.state;
+
+//     let result = self.respond_re_encrypt_user_share_for(
+//         dwallet_id,
+//         encrypted_user_secret_key_share_id,
+//         rejected,
+//         session_sequence_number,
+//     );
+
+//     let new_dwallet = self.get_dwallet(dwallet_id);
+//     let new_state = new_dwallet.state;
+
+//     prover::ensures(dwallet_state_machine(old_state, new_state, DWalletFun::RespondWalletImportedKeyVerificationAccept));
+    
+//     result
+// }
+
 
 /// Accept the encryption of the user share of a dWallet.
 ///
@@ -5042,3 +5342,112 @@ public fun last_processed_checkpoint_sequence_number(
 public(package) fun last_session_sequence_number(self: &DWalletCoordinatorInner): u64 {
     self.session_management.next_session_sequence_number - 1
 }
+
+#[spec_only]
+use prover::ghost;
+#[spec_only]
+use prover::prover;
+
+#[spec_only]
+public enum DWalletFun has copy, drop {
+    RequestDKGFirstRound,
+    RequestImportedKeyVerification,
+    CompleteNetworkDKGRejected,
+    CompleteNetworkDKGAccepted,
+    RequestDKGSecondRound,
+    RespondWalletDKGSecondRoundAccept,
+    RespondWalletDKGSecondRoundReject,
+    AcceptEncryptedUserShare,
+    RespondWalletImportedKeyVerificationReject,
+    RespondWalletImportedKeyVerificationAccept,
+}
+
+#[spec_only]
+public fun dwallet_state_init(state: DWalletState, op: DWalletFun): bool {
+    match (state) {
+        DWalletState::DKGRequested => {
+            match (op) {
+                DWalletFun::RequestDKGFirstRound => true,
+                _ => false,
+            }
+        },
+        DWalletState::AwaitingNetworkImportedKeyVerification => {
+            match (op) {
+                DWalletFun::RequestImportedKeyVerification => true,
+                _ => false,
+            }
+        },
+        _ => false,
+    }
+}
+
+#[spec_only]
+public fun dwallet_state_machine(src: DWalletState, dest: DWalletState, op: DWalletFun): bool {
+    match (src) {
+        DWalletState::DKGRequested => match (dest) {
+            DWalletState::NetworkRejectedDKGRequest => match (op) {
+                DWalletFun::CompleteNetworkDKGRejected => true,
+                _ => false,
+            },
+            DWalletState::AwaitingUserDKGVerificationInitiation { .. } => match (op) {
+                DWalletFun::CompleteNetworkDKGAccepted => true,
+                _ => false,
+            },
+            _ => false,
+        },
+        DWalletState::AwaitingUserDKGVerificationInitiation { .. } => match (dest) {
+            DWalletState::AwaitingNetworkDKGVerification => match (op) {
+                DWalletFun::RequestDKGSecondRound => true,
+                _ => false,
+            },
+            _ => false,
+        },
+        DWalletState::AwaitingNetworkDKGVerification => match (dest) {
+            DWalletState::NetworkRejectedDKGVerification => match (op) {
+                DWalletFun::RespondWalletDKGSecondRoundReject => true,
+                _ => false,
+            },
+            DWalletState::AwaitingKeyHolderSignature { .. } => match (op) {
+                DWalletFun::RespondWalletDKGSecondRoundAccept => true,
+                _ => false,
+            },
+            _ => false,
+        },
+        DWalletState::AwaitingKeyHolderSignature { .. } => match (dest) {
+            DWalletState::Active { .. } => match (op) {
+                DWalletFun::AcceptEncryptedUserShare => true,
+                _ => false,
+            },
+            _ => false,
+        },
+        DWalletState::Active { .. } => match (dest) {
+            DWalletState::Active { .. } => match (op) {
+                DWalletFun::AcceptEncryptedUserShare => true,
+                _ => false,
+            },
+            _ => false,
+        },
+        DWalletState::AwaitingNetworkImportedKeyVerification => match (dest) {
+            DWalletState::NetworkRejectedImportedKeyVerification => match (op) {
+                DWalletFun::RespondWalletImportedKeyVerificationReject => true,
+                _ => false,
+            },
+            DWalletState::AwaitingKeyHolderSignature { .. } => match (op) {
+                DWalletFun::RespondWalletImportedKeyVerificationAccept => true,
+                _ => false,
+            },
+            _ => false,
+        },
+        _ => false,
+    }
+}
+
+// #[spec_only]
+// public macro fun dwallet_state_init_macro<$T>($f: || -> $T, $func: DWalletFun): $T {
+//     let func = $func;
+
+//     let result = $f();
+//     prover::ensures(dwallet_state_machine(result.state, func));
+//     result
+// }
+

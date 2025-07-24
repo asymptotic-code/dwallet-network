@@ -5,7 +5,8 @@ license = "BSD-3-Clause-Clear"
 authors = ["dWallet Labs Ltd. <dev@dwalletlabs.com>"]
 
 [dependencies]
-Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/mainnet" }
+MoveStdlib = { git = "https://github.com/asymptotic-code/sui.git", rev = "next", subdir = "crates/sui-framework/packages/move-stdlib" }
+Sui = { git = "https://github.com/asymptotic-code/sui.git", rev = "next", subdir = "crates/sui-framework/packages/sui-framework" }
 
 # For remote import, use the `{ git = "...", subdir = "...", rev = "..." }`.
 # Revision can be a branch, a tag, and a commit hash.
@@ -20,6 +21,7 @@ Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-fram
 
 [addresses]
 ika = "0x0"
+sui = "0x2"
 
 # Named addresses will be accessible in Move as `@name`. They're also exported:
 # for example, `std = "0x1"` is exported by the Standard Library.

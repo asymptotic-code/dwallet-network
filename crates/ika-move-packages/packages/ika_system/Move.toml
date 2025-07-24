@@ -5,7 +5,10 @@ license = "BSD-3-Clause-Clear"
 authors = ["dWallet Labs Ltd. <dev@dwalletlabs.com>"]
 
 [dependencies]
-# ika = { local = "../ika" }
+ika = { local = "../ika" }
+
+SuiProver = { git = "https://github.com/asymptotic-code/sui-prover.git", subdir = "packages/sui-prover", rev = "main", override = true }
+
 
 # For remote import, use the `{ git = "...", subdir = "...", rev = "..." }`.
 # Revision can be a branch, a tag, and a commit hash.
@@ -19,8 +22,7 @@ authors = ["dWallet Labs Ltd. <dev@dwalletlabs.com>"]
 # Override = { local = "../conflicting/version", override = true }
 
 [addresses]
-ika_system = "0x0"
-ika = "0x0"
+ika_system = "0x5"
 
 # Named addresses will be accessible in Move as `@name`. They're also exported:
 # for example, `std = "0x1"` is exported by the Standard Library.
