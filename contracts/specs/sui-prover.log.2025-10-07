@@ -1,0 +1,187 @@
+2025-10-07T15:02:59.783987Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:07:41.969557Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:08:01.816820Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:09:10.963018Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:09:58.628146Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:10:00.891067Z  INFO move_prover_boogie_backend::generator: preparing module 0x0::staked_ika_specs
+2025-10-07T15:10:00.993319Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:00.994805Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 81 verification conditions
+2025-10-07T15:10:00.994814Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/spec_no_abort_check.bpl`
+2025-10-07T15:10:06.266373Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:10:08.521413Z  INFO move_prover_boogie_backend::generator: preparing module 0x0::staked_ika_specs
+2025-10-07T15:10:08.611805Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:08.613314Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 81 verification conditions
+2025-10-07T15:10:08.613322Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/spec_no_abort_check.bpl`
+2025-10-07T15:10:08.613623Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:10:08.613630Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -enhancedErrorMessages:1 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -vcsCores:2 output/spec_no_abort_check.bpl -vcsFinalAssertTimeout:600 -vcsCores:4 -vcsMaxKeepGoingSplits:2 -vcsSplitOnEveryAssert -proverOpt:O:model_validate=true -printVerifiedProceduresCount:0 -printModel:1 -inferModifies -verifySeparately -proverOpt:O:smt.QI.EAGER_THRESHOLD=100
+2025-10-07T15:10:08.613642Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:10:08.989738Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:10:08.990087Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/spec_no_abort_check.bpl.log
+2025-10-07T15:10:08.996165Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:08.997737Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 81 verification conditions
+2025-10-07T15:10:08.997742Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::validator_id.bpl`
+2025-10-07T15:10:08.997997Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:10:08.998000Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -printModel:1 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -printVerifiedProceduresCount:0 -vcsFinalAssertTimeout:600 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -vcsCores:2 output/staked_ika_specs::validator_id.bpl -proverOpt:O:model_validate=true -verifySeparately -vcsSplitOnEveryAssert -enhancedErrorMessages:1 -vcsCores:4 -vcsMaxKeepGoingSplits:2 -inferModifies
+2025-10-07T15:10:08.998005Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:10:09.554091Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:10:09.554121Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::validator_id.bpl.log
+2025-10-07T15:10:09.554692Z  INFO move_prover_boogie_backend::generator: 0.000s building, 0.107s translation, 0.949s verification
+2025-10-07T15:10:38.764491Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:10:41.415987Z  INFO move_prover_boogie_backend::generator: preparing module 0x0::staked_ika_specs
+2025-10-07T15:10:41.521301Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:41.525308Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 86 verification conditions
+2025-10-07T15:10:41.525319Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/spec_no_abort_check.bpl`
+2025-10-07T15:10:41.525709Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:10:41.525714Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -vcsSplitOnEveryAssert -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -vcsFinalAssertTimeout:600 -verifySeparately -proverOpt:O:model_validate=true -printVerifiedProceduresCount:0 -enhancedErrorMessages:1 -printModel:1 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -vcsCores:4 -inferModifies -vcsCores:2 -vcsMaxKeepGoingSplits:2 output/spec_no_abort_check.bpl
+2025-10-07T15:10:41.525721Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:10:41.924821Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:10:41.925212Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/spec_no_abort_check.bpl.log
+2025-10-07T15:10:41.931786Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:41.935647Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 86 verification conditions
+2025-10-07T15:10:41.935660Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::value.bpl`
+2025-10-07T15:10:41.936063Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:10:41.936068Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -vcsCores:2 -printVerifiedProceduresCount:0 -vcsMaxKeepGoingSplits:2 -printModel:1 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -verifySeparately -inferModifies -proverOpt:O:model_validate=true -vcsCores:4 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -vcsFinalAssertTimeout:600 output/staked_ika_specs::value.bpl -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -vcsSplitOnEveryAssert -enhancedErrorMessages:1
+2025-10-07T15:10:41.936074Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:10:42.529442Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:10:42.529480Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::value.bpl.log
+2025-10-07T15:10:42.535874Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:42.539702Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 86 verification conditions
+2025-10-07T15:10:42.539710Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::validator_id.bpl`
+2025-10-07T15:10:42.540060Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:10:42.540063Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -verifySeparately -enhancedErrorMessages:1 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 output/staked_ika_specs::validator_id.bpl -vcsMaxKeepGoingSplits:2 -vcsSplitOnEveryAssert -printModel:1 -vcsFinalAssertTimeout:600 -vcsCores:4 -printVerifiedProceduresCount:0 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -vcsCores:2 -inferModifies -proverOpt:O:model_validate=true
+2025-10-07T15:10:42.540068Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:10:43.095900Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:10:43.095938Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::validator_id.bpl.log
+2025-10-07T15:10:43.102580Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:43.106572Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 86 verification conditions
+2025-10-07T15:10:43.106579Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::activation_epoch.bpl`
+2025-10-07T15:10:43.106990Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:10:43.106997Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -inferModifies -enhancedErrorMessages:1 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -vcsSplitOnEveryAssert -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -vcsCores:2 output/staked_ika_specs::activation_epoch.bpl -vcsMaxKeepGoingSplits:2 -printModel:1 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -vcsFinalAssertTimeout:600 -proverOpt:O:model_validate=true -vcsCores:4 -printVerifiedProceduresCount:0 -verifySeparately
+2025-10-07T15:10:43.107003Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:10:43.655743Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:10:43.655773Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::activation_epoch.bpl.log
+2025-10-07T15:10:43.662269Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:43.665576Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 86 verification conditions
+2025-10-07T15:10:43.665580Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::is_staked.bpl`
+2025-10-07T15:10:43.665879Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:10:43.665882Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -vcsFinalAssertTimeout:600 -enhancedErrorMessages:1 -verifySeparately -vcsCores:2 -inferModifies -proverOpt:O:model_validate=true -vcsSplitOnEveryAssert -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 output/staked_ika_specs::is_staked.bpl -vcsMaxKeepGoingSplits:2 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -printModel:1 -vcsCores:4 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -printVerifiedProceduresCount:0
+2025-10-07T15:10:43.665887Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:10:44.329485Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:10:44.329531Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::is_staked.bpl.log
+2025-10-07T15:10:44.336547Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:44.340170Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 86 verification conditions
+2025-10-07T15:10:44.340180Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::is_withdrawing.bpl`
+2025-10-07T15:10:44.340592Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:10:44.340598Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -vcsFinalAssertTimeout:600 -printModel:1 -enhancedErrorMessages:1 -inferModifies -vcsCores:4 -vcsMaxKeepGoingSplits:2 -vcsCores:2 output/staked_ika_specs::is_withdrawing.bpl -printVerifiedProceduresCount:0 -vcsSplitOnEveryAssert -proverOpt:O:model_validate=true -verifySeparately -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100
+2025-10-07T15:10:44.340604Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:10:44.909930Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:10:44.909978Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::is_withdrawing.bpl.log
+2025-10-07T15:10:44.917385Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:10:44.922002Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 86 verification conditions
+2025-10-07T15:10:44.922012Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::withdraw_epoch.bpl`
+2025-10-07T15:10:44.922338Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:10:44.922346Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie output/staked_ika_specs::withdraw_epoch.bpl -printModel:1 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -enhancedErrorMessages:1 -vcsFinalAssertTimeout:600 -inferModifies -vcsMaxKeepGoingSplits:2 -proverOpt:O:model_validate=true -vcsSplitOnEveryAssert -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -printVerifiedProceduresCount:0 -vcsCores:4 -vcsCores:2 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -verifySeparately
+2025-10-07T15:10:44.922375Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:10:45.606944Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:10:45.606984Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::withdraw_epoch.bpl.log
+2025-10-07T15:10:45.607984Z  INFO move_prover_boogie_backend::generator: 0.000s building, 0.121s translation, 4.096s verification
+2025-10-07T15:11:27.573784Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:12:33.788183Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:12:36.375235Z  INFO move_prover_boogie_backend::generator: preparing module 0x0::staked_ika_specs
+2025-10-07T15:12:36.483815Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:12:36.491228Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 88 verification conditions
+2025-10-07T15:12:36.491238Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/spec_no_abort_check.bpl`
+2025-10-07T15:12:36.491964Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:12:36.491968Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -vcsFinalAssertTimeout:600 -proverOpt:O:model_validate=true -printVerifiedProceduresCount:0 -inferModifies -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -vcsSplitOnEveryAssert -vcsCores:4 -vcsMaxKeepGoingSplits:2 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -printModel:1 -verifySeparately -enhancedErrorMessages:1 output/spec_no_abort_check.bpl -vcsCores:2
+2025-10-07T15:12:36.491973Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:12:36.981291Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:12:36.981727Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/spec_no_abort_check.bpl.log
+2025-10-07T15:12:36.996399Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:12:37.003712Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 88 verification conditions
+2025-10-07T15:12:37.003727Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::activation_epoch_spec.bpl`
+2025-10-07T15:12:37.012205Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:12:37.012231Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie output/staked_ika_specs::activation_epoch_spec.bpl -vcsCores:4 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -inferModifies -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -vcsSplitOnEveryAssert -proverOpt:O:model_validate=true -vcsMaxKeepGoingSplits:2 -printVerifiedProceduresCount:0 -printModel:1 -verifySeparately -enhancedErrorMessages:1 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -vcsFinalAssertTimeout:600 -vcsCores:2
+2025-10-07T15:12:37.012247Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:12:37.755070Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:12:37.755107Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::activation_epoch_spec.bpl.log
+2025-10-07T15:12:37.761586Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:12:37.768921Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 88 verification conditions
+2025-10-07T15:12:37.768932Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::is_staked_spec.bpl`
+2025-10-07T15:12:37.769312Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:12:37.769316Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -vcsFinalAssertTimeout:600 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -vcsCores:2 -printVerifiedProceduresCount:0 -vcsSplitOnEveryAssert -inferModifies -enhancedErrorMessages:1 -vcsCores:4 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -verifySeparately output/staked_ika_specs::is_staked_spec.bpl -vcsMaxKeepGoingSplits:2 -proverOpt:O:model_validate=true -printModel:1
+2025-10-07T15:12:37.769322Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:12:38.340361Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:12:38.340409Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::is_staked_spec.bpl.log
+2025-10-07T15:12:38.346970Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:12:38.354878Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 88 verification conditions
+2025-10-07T15:12:38.354885Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::is_withdrawing_spec.bpl`
+2025-10-07T15:12:38.355853Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:12:38.355865Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -inferModifies output/staked_ika_specs::is_withdrawing_spec.bpl -vcsMaxKeepGoingSplits:2 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -verifySeparately -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -vcsCores:2 -vcsCores:4 -vcsFinalAssertTimeout:600 -vcsSplitOnEveryAssert -printModel:1 -enhancedErrorMessages:1 -printVerifiedProceduresCount:0 -proverOpt:O:model_validate=true
+2025-10-07T15:12:38.355872Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:12:38.953372Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:12:38.953414Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::is_withdrawing_spec.bpl.log
+2025-10-07T15:12:38.960445Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:12:38.968364Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 88 verification conditions
+2025-10-07T15:12:38.968378Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::join_spec.bpl`
+2025-10-07T15:12:38.968809Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:12:38.968814Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -vcsCores:4 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -inferModifies -proverOpt:O:model_validate=true -printVerifiedProceduresCount:0 -vcsCores:2 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -vcsFinalAssertTimeout:600 -vcsMaxKeepGoingSplits:2 -verifySeparately -enhancedErrorMessages:1 output/staked_ika_specs::join_spec.bpl -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -vcsSplitOnEveryAssert -printModel:1
+2025-10-07T15:12:38.968820Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:12:39.570851Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:12:39.570886Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::join_spec.bpl.log
+2025-10-07T15:12:39.578039Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:12:39.585924Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 88 verification conditions
+2025-10-07T15:12:39.585933Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::split_spec.bpl`
+2025-10-07T15:12:39.586370Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:12:39.586376Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -printModel:1 -printVerifiedProceduresCount:0 -verifySeparately output/staked_ika_specs::split_spec.bpl -enhancedErrorMessages:1 -vcsMaxKeepGoingSplits:2 -vcsFinalAssertTimeout:600 -vcsSplitOnEveryAssert -inferModifies -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -vcsCores:2 -vcsCores:4 -proverOpt:O:model_validate=true
+2025-10-07T15:12:39.586382Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:12:40.242630Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:12:40.242666Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::split_spec.bpl.log
+2025-10-07T15:12:40.249140Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:12:40.256325Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 88 verification conditions
+2025-10-07T15:12:40.256334Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::validator_id_spec.bpl`
+2025-10-07T15:12:40.256742Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:12:40.256750Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -inferModifies -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 output/staked_ika_specs::validator_id_spec.bpl -enhancedErrorMessages:1 -verifySeparately -printModel:1 -vcsSplitOnEveryAssert -vcsMaxKeepGoingSplits:2 -vcsCores:4 -printVerifiedProceduresCount:0 -proverOpt:O:model_validate=true -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -vcsCores:2 -vcsFinalAssertTimeout:600
+2025-10-07T15:12:40.256756Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:12:40.930750Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:12:40.930786Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::validator_id_spec.bpl.log
+2025-10-07T15:12:40.937498Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:12:40.945205Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 88 verification conditions
+2025-10-07T15:12:40.945213Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::value_spec.bpl`
+2025-10-07T15:12:40.945673Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:12:40.945681Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -inferModifies -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -verifySeparately -printVerifiedProceduresCount:0 -vcsMaxKeepGoingSplits:2 -enhancedErrorMessages:1 -vcsFinalAssertTimeout:600 output/staked_ika_specs::value_spec.bpl -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -vcsCores:2 -printModel:1 -proverOpt:O:model_validate=true -vcsCores:4 -vcsSplitOnEveryAssert -proverOpt:O:smt.QI.LAZY_THRESHOLD=100
+2025-10-07T15:12:40.945689Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:12:41.531532Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:12:41.531567Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::value_spec.bpl.log
+2025-10-07T15:12:41.538478Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 254 module(s)
+2025-10-07T15:12:41.546299Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 88 verification conditions
+2025-10-07T15:12:41.546309Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/staked_ika_specs::withdraw_epoch_spec.bpl`
+2025-10-07T15:12:41.546739Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:12:41.546742Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -vcsCores:2 -printModel:1 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -proverOpt:O:model_validate=true -vcsMaxKeepGoingSplits:2 -printVerifiedProceduresCount:0 -enhancedErrorMessages:1 -vcsSplitOnEveryAssert -vcsFinalAssertTimeout:600 -verifySeparately -inferModifies -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -vcsCores:4 output/staked_ika_specs::withdraw_epoch_spec.bpl
+2025-10-07T15:12:41.546748Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:12:42.156013Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:12:42.156084Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: writing boogie log to output/staked_ika_specs::withdraw_epoch_spec.bpl.log
+2025-10-07T15:12:42.160008Z  INFO move_prover_boogie_backend::generator: 0.000s building, 0.124s translation, 5.685s verification
+2025-10-07T15:14:00.655048Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:14:03.117414Z  INFO move_prover_boogie_backend::generator: preparing module 0x0::staked_ika_specs
+2025-10-07T15:14:03.117640Z  INFO move_prover_boogie_backend::generator: preparing module 0x0::validator_info_specs
+2025-10-07T15:14:03.227183Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 255 module(s)
+2025-10-07T15:14:03.235798Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 89 verification conditions
+2025-10-07T15:14:03.235811Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/spec_no_abort_check.bpl`
+2025-10-07T15:14:03.236152Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:14:03.236162Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -vcsCores:2 -printModel:1 -verifySeparately -vcsFinalAssertTimeout:600 -enhancedErrorMessages:1 -vcsSplitOnEveryAssert -vcsCores:4 -vcsMaxKeepGoingSplits:2 -proverOpt:O:model_validate=true -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 output/spec_no_abort_check.bpl -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -printVerifiedProceduresCount:0 -inferModifies
+2025-10-07T15:14:03.236169Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:14:03.505349Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
+2025-10-07T15:15:46.163897Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:15:56.277133Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:16:32.975311Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:16:47.166122Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:16:57.963146Z DEBUG sui_prover: Sui-Prover CLI version: 0.0.2
+2025-10-07T15:17:00.425960Z  INFO move_prover_boogie_backend::generator: preparing module 0x0::staked_ika_specs
+2025-10-07T15:17:00.426210Z  INFO move_prover_boogie_backend::generator: preparing module 0x0::validator_info_specs
+2025-10-07T15:17:00.546598Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: generating verification conditions for 255 module(s)
+2025-10-07T15:17:00.562805Z  INFO move_prover_boogie_backend::boogie_backend::bytecode_translator: 105 verification conditions
+2025-10-07T15:17:00.562819Z DEBUG move_prover_boogie_backend::generator: writing boogie to `output/spec_no_abort_check.bpl`
+2025-10-07T15:17:00.563813Z  INFO move_prover_boogie_backend::boogie_backend::boogie_wrapper: running solver
+2025-10-07T15:17:00.563822Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: command line: /opt/homebrew/bin/boogie -proverOpt:PROVER_PATH=/opt/homebrew/bin/z3 -vcsFinalAssertTimeout:600 -vcsCores:4 -inferModifies -vcsCores:2 -vcsSplitOnEveryAssert output/spec_no_abort_check.bpl -verifySeparately -proverOpt:O:model_validate=true -printVerifiedProceduresCount:0 -vcsMaxKeepGoingSplits:2 -proverOpt:O:smt.QI.EAGER_THRESHOLD=100 -printModel:1 -proverOpt:O:smt.QI.LAZY_THRESHOLD=100 -enhancedErrorMessages:1
+2025-10-07T15:17:00.563828Z DEBUG move_prover_boogie_backend::boogie_backend::prover_task_runner: running Boogie command with seed 0
+2025-10-07T15:17:00.809354Z DEBUG move_prover_boogie_backend::boogie_backend::boogie_wrapper: analyzing boogie output
